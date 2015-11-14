@@ -11,7 +11,8 @@ def test_proxy(proxy_ip, proxy_port):
     res = urllib2.urlopen('http://http-echo.jgate.de/').read()
 
     ip_regex = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-    print 'Known IPs:', ' '.join(re.findall(ip_regex, res))
+    ips = set(re.findall(ip_regex, res))
+    print 'Known IPs:', ' '.join(ips)
 
     ip_regex = '<h4>Client IP.*?<p>(.*?) '
     fw_regex = '<li class="header">X-Forwarded-For=(.*?)<'
